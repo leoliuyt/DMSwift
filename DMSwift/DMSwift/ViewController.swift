@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         
         let f = selection2SortOf(a,byCriteria:<);
         print(f)
+        
+        let g = bubbleSortOf(a);
+        print("冒泡排序:\n \(g)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +62,6 @@ class ViewController: UIViewController {
     }
     
     //希尔排序
-    
     //一般简单排序
     func shellInsertionSortOf<T: Comparable>(_ coll: Array<T>, dk: Int,byCriteria: Criteria<T>) -> Array<T> {
         guard coll.count > 1 else {
@@ -86,6 +88,7 @@ class ViewController: UIViewController {
         }
         return result;
     }
+    
     
     //简单选择排序
     func selectionSortOf<T:Comparable>(_ coll: Array<T>, byCriteria: Criteria<T> = {$0 < $1}) -> Array<T>{
@@ -140,5 +143,22 @@ class ViewController: UIViewController {
         }
         return result;
     }
+    
+    //冒泡排序
+    func bubbleSortOf<T:Comparable>(_ coll: Array<T>, byCriteria: Criteria<T> = {$0 < $1}) -> Array<T>{
+        guard coll.count > 1 else {
+            return coll
+        }
+        var result = coll
+        for i in 0 ..< coll.count-1 {
+            for j in  0 ..< coll.count-i-1 {
+                if !byCriteria(result[j],result[j+1]) {
+                    result.swapAt(j, j+1)
+                }
+            }
+        }
+        return result;
+    }
+    
 }
 
